@@ -4,7 +4,7 @@
     const nodeUrlInput = form.querySelector(form.dataset.url);
     const nodeInfo = form.querySelector(form.dataset.info);
     const nodeMsg = form.querySelector(form.dataset.msg);
-    const nodeMsgGet = (key, error) => [nodeMsg.dataset[key], error,].filter(data => data && String(data).length).join(": ");
+    const nodeMsgGet = (key, error) => [nodeMsg.dataset[key], error,].filter(data => data?.length).join(": ");
     const nodeMsgSet = (key, error) => nodeMsg.textContent = nodeMsgGet(key, error);
 
     nodeMsg.addEventListener("input", evt => nodeMsgSet("clear"));
@@ -19,20 +19,17 @@
         fetch(formAction)
             .then(data => data.json())
             .then(data => {
-                if (!("error" in data)) return data;
-                if ("href" in data.error) throw data.error.href;
+                if ("error" in data) throw data.error?.href ?? data.error;
 
-                throw data.error;
+                return data;
             })
             .then(data => {
                 nodeInfo.querySelector(nodeInfo.dataset.url).textContent = data.url;
                 nodeInfo.querySelector(nodeInfo.dataset.qr).setAttribute("src", data.qr);
+                nodeInfo.classList.remove("nod");
 
                 nodeMsgSet("ok");
-                nodeInfo.classList.remove("nod");
             })
-            .catch(exception => {
-                nodeMsgSet("error", exception);
-            });
+            .catch(exception => nodeMsgSet("error", exception));
     });
 }))(window, ".form-url");
