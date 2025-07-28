@@ -1,7 +1,6 @@
 (({"document": doc, "location": loc,}, formCssSelector) => doc.addEventListener("DOMContentLoaded", () => {
     const form = doc.querySelector(formCssSelector);
     const formAction = new URL(form.getAttribute("action"), loc.origin);
-    const nodeUrlInput = form.querySelector(form.dataset.url);
     const nodeInfo = form.querySelector(form.dataset.info);
     const nodeMsg = form.querySelector(form.dataset.msg);
     const nodeMsgGet = (key, error) => [nodeMsg.dataset[key], error,].filter(data => data?.length).join(": ");

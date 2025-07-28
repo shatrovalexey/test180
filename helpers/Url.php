@@ -22,7 +22,7 @@ class Url
     *
     * @return string
     */
-    protected function _getUrl(string $alias, string $path): string
+    protected function _get(string $alias, string $path): string
     {
         return implode('/', [$this->origin, $path, $alias,]);
     }
@@ -35,9 +35,9 @@ class Url
     *
     * @return string
     */
-    public function getAliasUrl(string $alias, string $path = 'api/url'): string
+    public function getAlias(string $alias, string $path = 'api/url'): string
     {
-        return static::_getUrl($alias, $path);
+        return static::_get($alias, $path);
     }
 
     /**
@@ -48,8 +48,8 @@ class Url
     *
     * @return string
     */
-    public function getQrUrl(string $alias, string $path = 'api/qr'): string
+    public function getQr(string $alias, string $path = 'api/qr'): string
     {
-        return static::_getUrl($alias, $path);
+        return static::_get($alias, $path);
     }
 }

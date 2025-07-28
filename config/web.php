@@ -47,8 +47,8 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 'api/url/add' => 'api/url-add',
-                'api/url/<alias:[a-z0-9]+>' => 'api/url',
-                'api/qr/<alias:[a-z0-9]+>' => 'api/qr',
+                'api/url/<alias:.+>' => 'api/url',
+                'api/qr/<alias:.+>' => 'api/qr',
             ],
         ],
     ],

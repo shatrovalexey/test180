@@ -47,7 +47,7 @@ class Url extends ActiveRecord
     */
     protected function generateAlias()
     {
-        $this->alias = sha1(uniqid('', true));
+        $this->alias = Yii::$app->security->generateRandomString();
     }
 
     /**

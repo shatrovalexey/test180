@@ -19,7 +19,7 @@ class ApiController extends Controller
 {
     public function behaviors()
     {
-        return parent::behaviors() + ['contentNegotiator' => [
+        return ['contentNegotiator' => [
             'class' => ContentNegotiator::class
             , 'formats' => ['application/json' => Response::FORMAT_JSON,]
             ,
@@ -51,8 +51,8 @@ class ApiController extends Controller
         $url = new HelperUrl(\Yii::$app->request->hostInfo);
 
         return [
-            'url' => $url->getAliasUrl($model->alias)
-            , 'qr' => $url->getQrUrl($model->alias)
+            'url' => $url->getAlias($model->alias)
+            , 'qr' => $url->getQr($model->alias)
             ,
         ];
     }
@@ -64,7 +64,7 @@ class ApiController extends Controller
     */
     public function actionQr(string $alias)
     {
-        $result = HelperQr::get((new HelperUrl(\Yii::$app->request->hostInfo))->getAliasUrl($alias));
+        $result = HelperQr::get((new HelperUrl(\Yii::$app->request->hostInfo))->getAlias($alias));
 
         \Yii::$app->response->format = Response::FORMAT_RAW;
         \Yii::$app->response->headers->add('Content-Type', $result->getMimeType());

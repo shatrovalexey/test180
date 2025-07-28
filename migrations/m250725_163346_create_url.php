@@ -12,7 +12,7 @@ class m250725_163346_create_url extends Migration
         $this->createTable('{{%url}}', [
             'id' => $this->primaryKey()
             , 'href' => $this->string()->notNull()
-            , 'alias' => $this->string()->notNull()->unique()
+            , 'alias' => $this->char(32)->notNull()->unique()
             , 'created_at' => $this->integer()->notNull()
             , 'updated_at' => $this->integer()->notNull()
             ,
